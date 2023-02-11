@@ -1,6 +1,42 @@
 # Visual Studio 2015 user specific files
 .vs/
 
+# JetBrains rider stuff
+
+# Common IntelliJ Platform excludes
+
+# User specific
+**/.idea/**/workspace.xml
+**/.idea/**/tasks.xml
+**/.idea/shelf/*
+**/.idea/dictionaries
+**/.idea/httpRequests/
+
+# Sensitive or high-churn files
+**/.idea/**/dataSources/
+**/.idea/**/dataSources.ids
+**/.idea/**/dataSources.xml
+**/.idea/**/dataSources.local.xml
+**/.idea/**/sqlDataSources.xml
+**/.idea/**/dynamic.xml
+
+# Rider
+# Rider auto-generates .iml files, and contentModel.xml
+**/.idea/**/*.iml
+**/.idea/**/contentModel.xml
+**/.idea/**/modules.xml
+
+*.suo
+*.user
+[Bb]in/
+[Oo]bj/
+_UpgradeReport_Files/
+[Pp]ackages/
+
+Thumbs.db
+Desktop.ini
+.DS_Store
+
 # Compiled Object files
 *.slo
 *.lo
@@ -72,3 +108,45 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+# Free Marketplace content
+Content/ParagonAurora
+Content/ParagonBoris
+Content/ParagonCountess
+Content/ParagonCrunch
+Content/ParagonDekker
+Content/ParagonDrongo
+Content/ParagonFengMao
+Content/ParagonFey
+Content/ParagonGadget
+Content/ParagonGideon
+Content/ParagonGreystone
+Content/ParagonGRIMexe
+Content/ParagonGrux
+Content/ParagonHowitzer
+Content/ParagonIggyScorch
+Content/ParagonKallari
+Content/ParagonKhaimera
+Content/ParagonKwang
+Content/ParagonLtBelica
+Content/ParagonMaleAnnouncer
+Content/ParagonMinions
+Content/ParagonMorigesh
+Content/ParagonMurdock
+Content/ParagonMuriel
+Content/ParagonNarbash
+Content/ParagonPhase
+Content/ParagonRampage
+Content/ParagonRevenant
+Content/ParagonRiktor
+Content/ParagonSerath
+Content/ParagonSevarog
+Content/ParagonShinbi
+Content/ParagonSparrow
+Content/ParagonSteel
+Content/ParagonSunWukong
+Content/ParagonTerra
+Content/ParagonTwinblast
+Content/ParagonWraith
+Content/ParagonYin
+Content/ParagonZinx
