@@ -16,18 +16,18 @@ class JAGGAJAGGA_API UShooterAnimInstance : public UAnimInstance
 public:
 	UFUNCTION(BlueprintCallable)
 	void UpdateAnimationProperties(float DeltaTime);
-	
+
 	virtual void NativeInitializeAnimation() override;
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	class AShooterCharacter* ShooterCharacter;
-
-	/** The Speed of the character */
+	
+	/** The speed of the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	float Speed;
 
-	/** Whether or not the character is in the air*/
+	/** Whether or not the character is in the air */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	bool bIsInAir;
 
@@ -38,4 +38,8 @@ private:
 	/** Offset yaw used for strafing */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	float MovementOffsetYaw;
+
+	/** Offset yaw the frame before we stopped moving */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	float LastMovementOffsetYaw;
 };
