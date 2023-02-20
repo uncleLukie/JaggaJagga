@@ -15,3 +15,4 @@ Just a weird third person single player shoooter that I am making to learn just 
 ## Assets required:
 Certain marketplace assets are added to the .gitignore to save on repo space, they must be added to the project for it to function correctly.
 - /Content/ParagonLtBelica https://www.unrealengine.com/marketplace/en-US/product/paragon-lt-belica
+- /Content/RuralAustralia https://unrealengine.com/marketplace/en-US/product/rural-australia
