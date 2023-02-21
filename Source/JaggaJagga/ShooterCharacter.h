@@ -25,28 +25,28 @@ protected:
 	/** Called for side to side input */
 	void MoveRight(float Value);
 
-	/** 
+	/**
 	* Called via input to turn at a given rate.
 	* @param Rate  This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
 	*/
 	void TurnAtRate(float Rate);
 
-	/** 
+	/**
 	* Called via input to look up/down at a given rate.
 	* @param Rate  This is a normalized rate, i.e. 1.0 means 100% of desired rate
 	*/
 	void LookUpAtRate(float Rate);
 
 	/**
-	 * Rotate controller based on mouse X movement
-	 * @param Value		The input value from mouse movement
-	 */
+	* Rotate controller based on mouse X movement
+	* @param Value   The input value from mouse movement
+	*/
 	void Turn(float Value);
 
 	/**
-	 * Rotate controller based on mouse Y movement
-	 * @param Value		The input value from mouse movement
-	 */
+	* Rotate controller based on mouse Y movement
+	* @param Value   The input value from mouse movement
+	*/
 	void LookUp(float Value);
 
 	/** Called when the Fire Button is pressed */
@@ -64,7 +64,7 @@ protected:
 	void SetLookRates();
 
 	void CalculateCrosshairSpread(float DeltaTime);
-
+	
 	void StartCrosshairBulletFire();
 
 	UFUNCTION()
@@ -78,7 +78,13 @@ protected:
 	UFUNCTION()
 	void AutoFireReset();
 
-public:	
+	/** Line trace for items under the crosshairs */
+	bool TraceUnderCrosshairs(FHitResult& OutHitResult, FVector& OutHitLocation);
+
+	/** Trace for items if OverlappedItemCount > 0 */
+	void TraceForItems();
+
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -105,8 +111,8 @@ private:
 	/** Turn rate while not aiming */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	float HipTurnRate;
-	
-	/** Look up rate when not aiming*/
+
+	/** Look up rate when not aiming */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	float HipLookUpRate;
 
@@ -118,24 +124,20 @@ private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	float AimingLookUpRate;
 
-	/** Scale factor for mouse look sensitivty. Turn rate when not aiming. */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"),
-		meta = (ClampMin = "0.0"), meta = (ClampMax = "1.0"), meta = (UIMin = "0.0"), meta = (UIMax = "1.0"))
+	/** Scale factor for mouse look sensitivity. Turn rate when not aiming. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"), meta = (ClampMin = "0.0", ClampMax = "1.0", UIMin = "0.0", UIMax = "1.0"))
 	float MouseHipTurnRate;
-	
-	/** Scale factor for mouse look sensitivty. Look up rate when not aiming. */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"),
-		meta = (ClampMin = "0.0"), meta = (ClampMax = "1.0"), meta = (UIMin = "0.0"), meta = (UIMax = "1.0"))
+
+	/** Scale factor for mouse look sensitivity. Look up rate when not aiming. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"), meta = (ClampMin = "0.0", ClampMax = "1.0", UIMin = "0.0", UIMax = "1.0"))
 	float MouseHipLookUpRate;
 
-	/** Scale factor for mouse look sensitivty. Turn rate when aiming. */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"),
-		meta = (ClampMin = "0.0"), meta = (ClampMax = "1.0"), meta = (UIMin = "0.0"), meta = (UIMax = "1.0"))
+	/** Scale factor for mouse look sensitivity. Turn rate when aiming. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"), meta = (ClampMin = "0.0", ClampMax = "1.0", UIMin = "0.0", UIMax = "1.0"))
 	float MouseAimingTurnRate;
 
-	/** Scale factor for mouse look sensitivty. Look up rate when aiming. */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"),
-		meta = (ClampMin = "0.0"), meta = (ClampMax = "1.0"), meta = (UIMin = "0.0"), meta = (UIMax = "1.0"))
+	/** Scale factor for mouse look sensitivity. Look up rate when aiming. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"), meta = (ClampMin = "0.0", ClampMax = "1.0", UIMin = "0.0", UIMax = "1.0"))
 	float MouseAimingLookUpRate;
 
 	/** Randomized gunshot sound cue */
@@ -156,7 +158,7 @@ private:
 
 	/** Smoke trail for bullets */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
-	UParticleSystem* BeamParticles;
+		UParticleSystem* BeamParticles;
 
 	/** True when aiming */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Combat, meta = (AllowPrivateAccess = "true"))
@@ -168,46 +170,38 @@ private:
 	/** Field of view value for when zoomed in */
 	float CameraZoomedFOV;
 
-	/** Curent field of view this frame */
+	/** Current field of view this frame */
 	float CameraCurrentFOV;
 
 	/** Interp speed for zooming when aiming */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
 	float ZoomInterpSpeed;
 
-	/** Determines the spread of the crosshairs */	
+	/** Determines the spread of the crosshairs */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Crosshairs, meta = (AllowPrivateAccess = "true"))
 	float CrosshairSpreadMultiplier;
 
-	/** Velocity component for crosshairs spread */	
+	/** Velocity component for crosshairs spread */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Crosshairs, meta = (AllowPrivateAccess = "true"))
 	float CrosshairVelocityFactor;
 
-	/** In air component for crosshairs spread */	
+	/** In air component for crosshairs spread */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Crosshairs, meta = (AllowPrivateAccess = "true"))
 	float CrosshairInAirFactor;
 
-	/** Aim component for crosshairs spread */	
+	/** Aim component for crosshairs spread */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Crosshairs, meta = (AllowPrivateAccess = "true"))
 	float CrosshairAimFactor;
 
-	/** Shooting component for crosshairs spread */	
+	/** Shooting component for crosshairs spread */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Crosshairs, meta = (AllowPrivateAccess = "true"))
 	float CrosshairShootingFactor;
-
-	/** Shooting component for crosshairs spread */	
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Crosshairs, meta = (AllowPrivateAccess = "true"))
-	float ShootTimeDuration;
-
-	/** Shooting component for crosshairs spread */	
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Crosshairs, meta = (AllowPrivateAccess = "true"))
-	bool bFiringBullet;
-
-	/** sasd */
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Crosshairs, meta = (AllowPrivateAccess = "true"))
-	FTimerHandle CrosshairShootTimer;
 	
-	/** LMB or RT pressed */
+	float ShootTimeDuration;
+	bool bFiringBullet;
+	FTimerHandle CrosshairShootTimer;
+
+	/** Left mouse button or right console trigger pressed */
 	bool bFireButtonPressed;
 
 	/** True when we can fire. False when waiting for the timer */
@@ -219,6 +213,16 @@ private:
 	/** Sets a timer between gunshots */
 	FTimerHandle AutoFireTimer;
 
+	/** True if we should trace every frame for items */
+	bool bShouldTraceForItems;
+
+	/** Number of overlapped AItems */
+	int8 OverlappedItemCount;
+
+	/** The AItem we hit last frame */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Items, meta = (AllowPrivateAccess = "true"))
+	class AItem* TraceHitItemLastFrame;
+
 public:
 	/** Returns CameraBoom subobject */
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
@@ -228,5 +232,10 @@ public:
 	FORCEINLINE bool GetAiming() const { return bAiming; }
 
 	UFUNCTION(BlueprintCallable)
-	float GetCrosshairSpreadMultipler() const;
+	float GetCrosshairSpreadMultiplier() const;
+
+	FORCEINLINE int8 GetOverlappedItemCount() const { return OverlappedItemCount; }
+
+	/** Adds/subtracts to/from OverlappedItemCount and updates bShouldTraceForItems */
+	void IncrementOverlappedItemCount(int8 Amount);
 };
