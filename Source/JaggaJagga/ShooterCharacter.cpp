@@ -501,6 +501,10 @@ void AShooterCharacter::TraceForItems()
 	}
 }
 
+void AShooterCharacter::SpawnDefaultWeapon()
+{
+}
+
 // Called every frame
 void AShooterCharacter::Tick(float DeltaTime)
 {
