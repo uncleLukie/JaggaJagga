@@ -22,14 +22,13 @@ UENUM(BlueprintType)
 enum class EItemState : uint8
 {
 	EIS_Pickup UMETA(DisplayName = "Pickup"),
-	EIS_EquipInterping UMETA(DisplayName = "EqupInterping"),
+	EIS_EquipInterping UMETA(DisplayName = "EquipInterping"),
 	EIS_PickedUp UMETA(DisplayName = "PickedUp"),
 	EIS_Equipped UMETA(DisplayName = "Equipped"),
-	EIS_Falling UMETA(DisplayName = "Falling")
+	EIS_Falling UMETA(DisplayName = "Falling"),
 
-	//EIR_MAX UMETA(DisplayName = "DefaultMAX")
+	EIS_MAX UMETA(DisplayName = "DefaultMAX")
 };
-
 
 UCLASS()
 class JAGGAJAGGA_API AItem : public AActor
@@ -65,7 +64,7 @@ protected:
 	/** Sets the ActiveStars array of bools based on rarity */
 	void SetActiveStars();
 
-	/** Sets properties of the item's components based on state */
+	/** Sets properties of the Item's components based on State */
 	void SetItemProperties(EItemState State);
 
 public:
@@ -114,4 +113,5 @@ public:
 	FORCEINLINE UBoxComponent* GetCollisionBox() const { return CollisionBox; }
 	FORCEINLINE EItemState GetItemState() const { return ItemState; }
 	void SetItemState(EItemState State);
+	FORCEINLINE USkeletalMeshComponent* GetItemMesh() const { return ItemMesh; }
 };
