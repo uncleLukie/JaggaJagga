@@ -8,8 +8,8 @@ Just a weird third person single player shoooter that I am making to learn just 
 
 ## How to get the repo working:
 - Requires Git LFS
-- Unreal Engine 4.27
-- Some IDE setup to UE4.27 standards to compile
+- Unreal Engine 5.1
+- Some IDE setup to UE5.1 standards to compile
 - Assets from the marketplace added to the project (see assets list below)
 
 ## Assets required:
