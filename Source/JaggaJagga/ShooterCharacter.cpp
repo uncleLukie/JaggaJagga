@@ -90,7 +90,7 @@ AShooterCharacter::AShooterCharacter() :
 	GetCharacterMovement()->JumpZVelocity = 600.f;
 	GetCharacterMovement()->AirControl = 0.2f;
 
-	// Create Hand Scene Component
+	// Create Hand Scene Component 
 	HandSceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("HandSceneComp"));
 }
 
@@ -644,7 +644,7 @@ void AShooterCharacter::ReloadWeapon()
 	if (EquippedWeapon == nullptr) return;
 
 	// Do we have ammo of the correct type?
-	if (CarryingAmmo())
+	if (CarryingAmmo() && !EquippedWeapon->ClipIsFull())
 	{
 		CombatState = ECombatState::ECS_Reloading;
 		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
@@ -813,7 +813,7 @@ void AShooterCharacter::GetPickupItem(AItem* Item)
 	{
 		UGameplayStatics::PlaySound2D(this, Item->GetEquipSound());
 	}
-	
+
 	auto Weapon = Cast<AWeapon>(Item);
 	if (Weapon)
 	{

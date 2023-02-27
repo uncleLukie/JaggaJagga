@@ -14,10 +14,17 @@ class JAGGAJAGGA_API UShooterAnimInstance : public UAnimInstance
 {
 	GENERATED_BODY()
 public:
+	UShooterAnimInstance();
+
 	UFUNCTION(BlueprintCallable)
 	void UpdateAnimationProperties(float DeltaTime);
 
 	virtual void NativeInitializeAnimation() override;
+
+protected:
+
+	/** Handle turning in place variables */
+	void TurnInPlace();
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
@@ -45,4 +52,26 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	bool bAiming;
+
+	/** Yaw of the Character this frame */
+	float CharacterYaw;
+	
+	/** Yaw of the Character the previous frame */
+	float CharacterYawLastFrame;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Turn In Place", meta = (AllowPrivateAccess = "true"))
+	float RootYawOffset;
+
+	/** Rotation curve value this frame */
+	float RotationCurve;
+	/** Rotation curve value last frame */
+	float RotationCurveLastFrame;
+
+	/** The pitch of the aim rotaiton, used for Aim Offset */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Turn In Place", meta = (AllowPrivateAccess = "true"))
+	float Pitch;
+
+	/** True when reloading, used to prevent Aim Offset while reloading */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Turn In Place", meta = (AllowPrivateAccess = "true"))
+	bool bReloading;
 };

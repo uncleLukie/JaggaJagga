@@ -152,9 +152,9 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Properties", meta = (AllowPrivateAccess = "true"))
 	class USoundCue* PickupSound;
 
-	/** Sound played when Item is equipped */
+	/** Sound played when the Item is equipped */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Properties", meta = (AllowPrivateAccess = "true"))
-	class USoundCue* EquipSound;
+	USoundCue* EquipSound;
 
 public:
 	FORCEINLINE UWidgetComponent* GetPickupWidget() const { return PickupWidget; }

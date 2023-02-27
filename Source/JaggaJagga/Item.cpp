@@ -252,7 +252,7 @@ void AItem::ItemInterp(float DeltaTime)
 
 		// Camera rotation this frame
 		const FRotator CameraRotation{ Character->GetFollowCamera()->GetComponentRotation() };
-		// Camera rotation plus initial Yaw Offset
+		// Camera rotation plus inital Yaw Offset
 		FRotator ItemRotation{ 0.f, CameraRotation.Yaw + InterpInitialYawOffset, 0.f };
 		SetActorRotation(ItemRotation, ETeleportType::TeleportPhysics);
 
@@ -261,7 +261,6 @@ void AItem::ItemInterp(float DeltaTime)
 			const float ScaleCurveValue = ItemScaleCurve->GetFloatValue(ElapsedTime);
 			SetActorScale3D(FVector(ScaleCurveValue, ScaleCurveValue, ScaleCurveValue));
 		}
-		
 	}
 }
 
@@ -294,10 +293,10 @@ void AItem::StartItemCurve(AShooterCharacter* Char)
 		&AItem::FinishInterping,
 		ZCurveTime);
 
-	// Get initial Yaw of the camera
+	// Get initial Yaw of the Camera
 	const double CameraRotationYaw{ Character->GetFollowCamera()->GetComponentRotation().Yaw };
 	// Get initial Yaw of the Item
-	const double ItemRotationYaw{ (GetActorRotation().Yaw) };
+	const double ItemRotationYaw{ GetActorRotation().Yaw };
 	// Initial Yaw offset between Camera and Item
 	InterpInitialYawOffset = ItemRotationYaw - CameraRotationYaw;
 }
